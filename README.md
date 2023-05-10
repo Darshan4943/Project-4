@@ -38,7 +38,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 react-router-dom
 material UI
-React DreagNDrop/react beautiful DnD
+React DragNDrop/react beautiful DnD
 rich text editor
 MUI Icons
 
