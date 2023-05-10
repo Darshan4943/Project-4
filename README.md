@@ -5,7 +5,7 @@ Kanban Board
 3. Install libraries
     1. react-router-dom
     2. material UI
-    3. React DreagNDrop/react beautiful DnD
+    3. React DragNDrop/react beautiful DnD
     4. rich text editor
     5. MUI Icons
 
