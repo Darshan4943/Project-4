@@ -1,0 +1,103 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: #026aa7;
+  color: #fff;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo img {
+  height: 30px;
+}
+
+.logoText {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.navItems {
+  list-style: none;
+  display: flex;
+  font-size: 20px;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.navItem {
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navItem:hover {
+  color: yellow;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.profile:hover img {
+  transform: scale(1.1);
+}
+
+.profileName {
+  font-size: 18px;
+  font-weight: bold;
+}
+.profileName:hover {
+  color: yellow;
+}
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 0.5rem;
+  }
+
+  .logo {
+    margin-bottom: 1rem;
+  }
+
+  .navItems {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navItem {
+    margin-bottom: 0.5rem;
+  }
+
+  .profile {
+    margin-top: 1rem;
+  }
+
+  .navItem:hover {
+    transform: scale(1.1);
+  }
+}
+
+
+
+
+
+
+
+
