@@ -1,5 +1,7 @@
-Kanban Board
-const boardData = {
+1. Kanban Board
+
+
+2. const boardData = {
   title: 'Home Task Management',
   columns: [
     {
@@ -28,7 +30,17 @@ const boardData = {
     }
   ]
 };
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+3. Install libraries
+
+react-router-dom
+material UI
+React DreagNDrop/react beautiful DnD
+rich text editor
+MUI Icons
 
 4. Create Navbar
 5. create todo
