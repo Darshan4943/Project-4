@@ -1,103 +1,45 @@
-.navbar {
+.navbar{
+    
+  height: 10%;
+  position: relative;
+  width: 100%;
+  
+  background-color: rgba(0,0,0,0.4);
+}
+.name{
+  /* border: 1px solid blue; */
+  color: white;
+  font-size: 1.5rem;
+  width: 20%;
+  position: relative;
+  top: 25px;
+  left: 70px;
+}
+.icon{
+  /* border: 1px solid green; */
+  margin-left: 30px;
+  text-align: center;
+  margin-top: 50px;
+}
+.button{
+  /* border: 1px solid red; */
+  position: absolute;
+  left: 80%;
+  width: 20%;
+  top:10px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem;
-  background-color: #026aa7;
-  color: #fff;
+  justify-content: space-evenly;
 }
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.logo img {
-  height: 30px;
-}
-
-.logoText {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-.navItems {
-  list-style: none;
-  display: flex;
-  font-size: 20px;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.navItem {
-  cursor: pointer;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.navItem:hover {
-  color: yellow;
-}
-
-.profile {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.profile img {
-  height: 50px;
-  width: 50px;
-  object-fit: cover;
+.userImage{
   border-radius: 50%;
-  transition: transform 0.3s ease;
 }
-
-.profile:hover img {
-  transform: scale(1.1);
+.share{
+  height: 40px;
+  width: 30%;
+  color: black;
+  background-color: lightblue;
+  font-size: 1rem;
+  border: none;
+  margin-top: 3%;
+  border-radius: 5px;
 }
-
-.profileName {
-  font-size: 18px;
-  font-weight: bold;
-}
-.profileName:hover {
-  color: yellow;
-}
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem 0.5rem;
-  }
-
-  .logo {
-    margin-bottom: 1rem;
-  }
-
-  .navItems {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navItem {
-    margin-bottom: 0.5rem;
-  }
-
-  .profile {
-    margin-top: 1rem;
-  }
-
-  .navItem:hover {
-    transform: scale(1.1);
-  }
-}
-
-
-
-
-
-
-
-

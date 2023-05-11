@@ -1,9 +1,9 @@
-import Navbar from "./navbar/Navbar";
+import Layout from '././layout/Layout.js';
 
 function App() {
   return (
     <div className="App">
-      <Navbar />
+     <Layout/>
     </div>
   );
 }
