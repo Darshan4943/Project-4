@@ -1,9 +1,9 @@
-import Layout from '././layout/Layout.js';
+import Layout from "././layout/Layout.js";
 
 function App() {
   return (
     <div className="App">
-     <Layout/>
+      <Layout />
     </div>
   );
 }
