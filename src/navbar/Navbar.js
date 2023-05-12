@@ -34,9 +34,9 @@ function Navbar() {
           </button>
           {showWorkspaceMenu && (
             <div className={style.dropdownContent}>
-              <a href="#">Workspace 1</a>
-              <a href="#">Workspace 2</a>
-              <a href="#">Workspace 3</a>
+              <a href="#">Trello</a>
+              <a href="#">Trello</a>
+              <a href="#">Trello</a>
             </div>
           )}
         </div>
@@ -46,9 +46,9 @@ function Navbar() {
           </button>
           {showStarredMenu && (
             <div className={style.dropdownContent}>
-              <a href="#">Starred Item 1</a>
-              <a href="#">Starred Item 2</a>
-              <a href="#">Starred Item 3</a>
+              <a href="#">Trello</a>
+              <a href="#">Trello</a>
+              <a href="#">Trello</a>
             </div>
           )}
         </div>
@@ -58,9 +58,9 @@ function Navbar() {
           </button>
           {showRecentMenu && (
             <div className={style.dropdownContent}>
-              <a href="#">Recent Item 1</a>
-              <a href="#">Recent Item 2</a>
-              <a href="#">Recent Item 3</a>
+              <a href="#">Trello </a>
+              <a href="#">Trello </a>
+              <a href="#">Trello </a>
             </div>
           )}
         </div>

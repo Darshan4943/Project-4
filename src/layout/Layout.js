@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Layout.module.css";
 import Navbar from "../navbar/Navbar";
+import NavbarTwo from "../navbar/NavbarTwo";
 
 
 function Layout() {
@@ -8,7 +9,7 @@ function Layout() {
     <div className={style.mainLayout}>
       <div className={style.image}>
         <Navbar/>
-        
+        <NavbarTwo/>
       </div>
     </div>
   );
