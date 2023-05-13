@@ -5,11 +5,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"; // Import the visibility off icon
 
 import styles from "./Activity.module.css";
 
 export default function Activity() {
   const [showDetails, setShowDetails] = useState(false);
+  const [watching, setWatching] = useState(false); // Add a state for watching
 
   const handleCloseDialog = () => {
     console.log("Dialog closed");
@@ -19,12 +21,16 @@ export default function Activity() {
     setShowDetails(!showDetails);
   };
 
+  const handleToggleWatching = () => {
+    setWatching(!watching);
+  };
+
   return (
     <>
       <div className={styles.mainDiv}>
         <div className={styles.title}>
           <h2 className={styles.head}>
-            <span className={styles.codeZingerIcon}></span> CodeZinger
+            <span className={styles.codeZingerIcon}></span>💻 CodeZinger
           </h2>
           <div className={styles.closeButton}>
             <IconButton
@@ -44,9 +50,18 @@ export default function Activity() {
             <span className={styles.notificationText}>Notifications</span>
           </div>
           <div className={styles.watchButton}>
-            <Button variant="contained">
-              <VisibilityIcon />
-              Watch
+            <Button variant="contained" onClick={handleToggleWatching}>
+              {watching ? (
+                <>
+                  <VisibilityOffIcon />
+                  Watching
+                </>
+              ) : (
+                <>
+                  <VisibilityIcon />
+                  Watch
+                </>
+              )}
             </Button>
           </div>
         </div>
@@ -59,7 +74,7 @@ export default function Activity() {
         />
         <div className={styles.des}>
           <ReceiptLongIcon sx={{ marginRight: "1rem" }} /> <h4>Activity</h4>
-          <div className={styles.watchButton}>
+          <div className={styles.watchButton1}>
             <Button variant="contained" onClick={handleToggleDetails}>
               {showDetails ? "Hide Details" : "Show Details"}
             </Button>
@@ -78,7 +93,6 @@ export default function Activity() {
           </div>
         )}
         <br /> <br />
-       
       </div>
     </>
   );
