@@ -51,17 +51,8 @@ export default function Activity() {
           </div>
           <div className={styles.watchButton}>
             <Button variant="contained" onClick={handleToggleWatching}>
-              {watching ? (
-                <>
-                  <VisibilityOffIcon />
-                  Watching
-                </>
-              ) : (
-                <>
-                  <VisibilityIcon />
-                  Watch
-                </>
-              )}
+              <VisibilityIcon />
+              {watching ? "Watching" : "Watch"}
             </Button>
           </div>
         </div>

@@ -23,7 +23,7 @@
   .watchButton {
 display: flex;
 flex-direction: column;
-    margin-left: 10rem;
+    margin-left: 15rem;
   }
     .watchButton:hover {
         background-color: lightgray;
