@@ -15,7 +15,20 @@
 .head{
     margin-bottom: 0;
 }
-
+.notificationWatchContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  .watchButton {
+display: flex;
+flex-direction: column;
+    margin-left: 1rem;
+  }
+    .watchButton:hover {
+        background-color: lightgray;
+      }
+    
 .para{
     margin-left: 2.7rem;
     
@@ -30,7 +43,8 @@
 .username{
     border: 1px solid;
     border-radius: 50%;
-    background-color: rgb(208, 255, 0);
+    background-color: rgb(7, 105, 218);
+    color: white;
     padding: .3rem;
 }
 .firstInputBox{
