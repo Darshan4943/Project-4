@@ -5,13 +5,15 @@ import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"; // Import the visibility off icon
-
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 import styles from "./Activity.module.css";
 
 export default function Activity() {
   const [showDetails, setShowDetails] = useState(false);
-  const [watching, setWatching] = useState(false); // Add a state for watching
+  const [watching, setWatching] = useState(false); 
+  const [description, setDescription] = useState("");
+  const [comment, setComment] = useState("");
 
   const handleCloseDialog = () => {
     console.log("Dialog closed");
@@ -23,6 +25,13 @@ export default function Activity() {
 
   const handleToggleWatching = () => {
     setWatching(!watching);
+  };
+  const handleDescriptionChange = (value) => {
+    setDescription(value);
+  };
+
+  const handleCommentChange = (value) => {
+    setComment(value);
   };
 
   return (
