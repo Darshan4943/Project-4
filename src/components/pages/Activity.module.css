@@ -66,3 +66,9 @@ flex-direction: column;
     margin-top: 0;
     font-size: small;
 }
+.secondInputBox {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 25rem;
+    height: 1.8rem;
+  }
