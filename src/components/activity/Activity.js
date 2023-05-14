@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/joy/Button";
+
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
@@ -101,6 +102,15 @@ export default function Activity() {
               onChange={handleDescriptionChange}
               placeholder="Add a more detailed description..."
             />
+            <div className={styles.buttonContainer}>
+            <Button   onClick={handleSaveDescription}>
+            Save
+          </Button>
+          
+              <Button color="neutral"  variant="soft" onClick={handleCancelDescription} sx={{ marginLeft: "0.5rem" }}>
+                Cancel
+              </Button>
+            </div>
           </div>
         ) : (
           <input
@@ -109,6 +119,7 @@ export default function Activity() {
             onClick={handleShowDescription}
           />
         )}
+       
         <div className={styles.des}>
           <ReceiptLongIcon sx={{ marginRight: "1rem" }} /> <h4>Activity</h4>
           <div className={styles.watchButton1}>
