@@ -8,19 +8,12 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styles from "./Activity.module.css";
-import { useNavigate } from "react-router-dom";
-import DescriptionEditor from "./DescriptionEditor";
 
 export default function Activity() {
   const [showDetails, setShowDetails] = useState(false);
   const [watching, setWatching] = useState(false); 
   const [description, setDescription] = useState("");
   const [comment, setComment] = useState("");
-  const [showDescription, setShowDescription] = useState(false);
-  const [showActivity, setShowActivity] = useState(false);
-  
-  const [editingDescription, setEditingDescription] = useState(false);
-  const navigate = useNavigate();
 
   const handleCloseDialog = () => {
     console.log("Dialog closed");
@@ -33,31 +26,12 @@ export default function Activity() {
   const handleToggleWatching = () => {
     setWatching(!watching);
   };
-
   const handleDescriptionChange = (value) => {
     setDescription(value);
   };
 
   const handleCommentChange = (value) => {
     setComment(value);
-  };
-
-  const handleShowDescription = () => {
-    setShowDescription(true);
-  };
-  const handleSaveDescription = () => {
-    setEditingDescription(false);
-    
-    console.log("Description saved:", description);
-  };
-
-  const handleCancelDescription = () => {
-    setEditingDescription(false);
-    setShowDescription(false);
-    setDescription("");
-  };
-  const handleShowActive = () => {
-    setShowActivity(true);
   };
 
   return (
@@ -75,7 +49,7 @@ export default function Activity() {
               color="neutral"
               size="small"
             >
-              <CloseIcon onClick={() => navigate('/')} />
+              <CloseIcon />
             </IconButton>
           </div>
         </div>
@@ -94,21 +68,10 @@ export default function Activity() {
         <div className={styles.des}>
           <MenuIcon sx={{ marginRight: "1rem" }} /> <h4>Description</h4>
         </div>
-        {showDescription ? (
-          <div className={styles.descriptionBox}>
-            <ReactQuill
-              value={description}
-              onChange={handleDescriptionChange}
-              placeholder="Add a more detailed description..."
-            />
-          </div>
-        ) : (
-          <input
-            className={styles.firstInputBox}
-            placeholder="Add a more detailed description..."
-            onClick={handleShowDescription}
-          />
-        )}
+        <input
+          className={styles.firstInputBox}
+          placeholder="Add a more detailed description..."
+        />
         <div className={styles.des}>
           <ReceiptLongIcon sx={{ marginRight: "1rem" }} /> <h4>Activity</h4>
           <div className={styles.watchButton1}>
@@ -118,33 +81,19 @@ export default function Activity() {
           </div>
         </div>
         <span className={styles.username}>MC</span>
-        {showActivity ? (
-          <div className={styles.activity}>
-            <ReactQuill
-              value={description}
-              onChange={handleDescriptionChange}
-              placeholder="Write a Comment..."
-            />
-          </div>
-        ) : (
-          <input
-            className={styles.secondInputBox}
-            placeholder="Write a Comment..."
-            onClick={handleShowActive}
-            />
-            )}
-            
-
-            
+        <input
+          className={styles.secondInputBox}
+          placeholder="Write a comment..."
+        />
         {showDetails && (
           <div className={styles.detailsContent}>
-          <span className={styles.username}>MC</span>
-          <span className={styles.comments}>MC added this card to To Do</span>
-          <p className={styles.commentsTime}>5 minutes ago</p>
+            <span className={styles.username}>MC</span>
+            <span className={styles.comments}>MC added this card to To Do</span>
+            <p className={styles.commentsTime}>5 minutes ago</p>
           </div>
-          )}
-          <br /> <br />
-          </div>
-          </>
-          );
-          }
+        )}
+        <br /> <br />
+      </div>
+    </>
+  );
+}
