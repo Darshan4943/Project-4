@@ -1,90 +1,129 @@
-.mainDiv{
+/* activity.module.css */
+
+.mainDiv {
     margin: 0 30%;
     border: 1px solid;
     width: 40rem;
     height: 50rem;
     padding: 0 1.5rem;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     z-index: 10000;
-    overflow:auto;
-    /* scrollbar-width: thin;
-    scrollbar-color: transparent ; */
-}
-
-.mainDiv::-webkit-scrollbar {
-    display:none;
-}
-
-.title{
+    overflow: auto;
+    background-color: #f4f5f7;
+  }
+  
+  .title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.head{
+  }
+  
+  .head {
     margin-bottom: 0;
-}
-.notificationWatchContainer {
+    color: #172b4d;
+  }
+  
+  .notificationWatchContainer {
     display: flex;
     align-items: center;
     margin-top: 1rem;
   }
+  
   .watchButton {
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
     margin-left: 15rem;
   }
-    .watchButton:hover {
-        background-color: lightgray;
-      }
-    
-.para{
+  
+  .watchButton:hover {
+    background-color: #e4e7ec;
+  }
+  
+  .para {
     margin-left: 2.7rem;
-    
-}
-.des{
+    color: #5e6c84;
+  }
+  
+  .des {
     margin-top: 1rem;
     margin-bottom: 0;
     display: flex;
     align-items: center;
-}
-
-.username{
+  }
+  
+  .username {
     border: 1px solid;
     border-radius: 50%;
     background-color: rgb(7, 105, 218);
     color: white;
-    padding: .3rem;
-}
-.firstInputBox{
+    padding: 0.3rem;
+  }
+  
+  .firstInputBox {
     margin-left: 2.7rem;
     width: 25rem;
-    height: 3.5rem;   
-    margin-bottom: .5rem;
-}
-.secondInputBox{
-    margin-left: .8rem;
+    height: 3.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    color: #172b4d;
+    background-color: #fff;
+  }
+  
+  .secondInputBox {
+    margin-left: 0.8rem;
     width: 25rem;
-    height: 1.8rem;   
-}
-.comments{
+    height: 1.8rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.3rem;
+    font-size: 0.8rem;
+    color: #172b4d;
+    background-color: #fff;
+  }
+  
+  .comments {
     margin-left: 1rem;
-}
-.commentsTime{
+    color: #172b4d;
+  }
+  
+  .commentsTime {
     margin-left: 2.9rem;
     margin-top: 0;
     font-size: small;
-}
-.secondInputBox {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    width: 25rem;
-    height: 1.8rem;
+    color: #5e6c84;
   }
+  
   .watchButton1 {
     display: flex;
     flex-direction: column;
-        margin-left: 15rem;
-      }
-        .watchButton1:hover {
-            background-color: lightgray;
-          }
+    margin-left: 15rem;
+  }
+  
+  .watchButton1:hover {
+    background-color: #e4e7ec;
+  }
+  
+  .detailsContent {
+    padding-top: 1rem;
+    border-top: 1px solid #dfe1e6;
+    margin-top: 1rem;
+    color: #172b4d;
+  }
+  
+  .activity {
+    margin-top: 1rem;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+  }
+  
+  .buttonContainer button {
+    margin-right: 0.5rem;
+  }
+  
