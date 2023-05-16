@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { StyledColumn } from "./StyledComponents";
+import { StyledColumn } from "./StyledComponents"; // Adjust the import path accordingly
 import { useRecoilState } from "recoil";
 import {
   addingTaskIndexState,
@@ -27,9 +27,12 @@ const List = ({ list, listIndex }) => {
   const [, setCardData] = useRecoilState(cardDataState);
   const [, setListsId] = useRecoilState(listId);
   const [, setTaskIndex] = useRecoilState(tasksIndex);
+  const [editingTaskId, setEditingTaskId] = useState(null);
 
   const handleAddTask = () => {
     setAddingTaskIndex(listIndex);
+    setEditingTaskId(null);
+    setNewTaskName("");
   };
 
   const handleConfirmTask = () => {
@@ -37,21 +40,37 @@ const List = ({ list, listIndex }) => {
       setLists((prevLists) => {
         const updatedLists = [...prevLists];
         const newTask = {
-          id: uuid(),
+          id: editingTaskId || uuid(),
           name: newTaskName,
           description: "",
           activity: [],
         };
-        updatedLists[addingTaskIndex] = {
-          ...updatedLists[addingTaskIndex],
-          tasks: [...updatedLists[addingTaskIndex].tasks, newTask],
-        };
+        if (editingTaskId) {
+          const existingTaskIndex = updatedLists[addingTaskIndex].tasks.findIndex((task) => task.id === editingTaskId);
+          if (existingTaskIndex !== -1) {
+            updatedLists[addingTaskIndex] = {
+              ...updatedLists[addingTaskIndex],
+              tasks: [
+                ...updatedLists[addingTaskIndex].tasks.slice(0, existingTaskIndex),
+                newTask,
+                ...updatedLists[addingTaskIndex].tasks.slice(existingTaskIndex + 1),
+              ],
+            };
+          }
+        } else {
+          updatedLists[addingTaskIndex] = {
+            ...updatedLists[addingTaskIndex],
+            tasks: [...updatedLists[addingTaskIndex].tasks, newTask],
+          };
+        }
         return updatedLists;
       });
       setNewTaskName("");
       setAddingTaskIndex(null);
+      setEditingTaskId(null);
     }
   };
+  
 
   const handleListDelete = (id) => {
     const filteredList = lists.filter((list) => list.id !== id);
@@ -66,125 +85,141 @@ const List = ({ list, listIndex }) => {
       updatedLists[listIndex] = {
         ...updatedLists[listIndex],
         tasks: updatedTasks,
-      };
-      return updatedLists;
-    });
-  };
+        };
+        return updatedLists;
+        });
+        };
+        
+        const handleEditTask = (taskId) => {
+        const task = lists[listIndex].tasks.find((t) => t.id === taskId);
+        if (task) {
+        setNewTaskName(task.name);
+        setAddingTaskIndex(listIndex);
+        setEditingTaskId(task.id);
+        }
+        };
+        
+        useEffect(() => {
+        localStorage.setItem("Lists", JSON.stringify(lists));
+        }, [lists]);
+        
+        const handleTaskClick = (task, listId, taskId) => {
+        setCardData((prevData) => ({
+        ...prevData,
+        taskName: "Card Name",
+        }));
+        setListsId(listId);
+        setTaskIndex(taskId);
+        navigate(`/activity/${task.id}`);
 
-  useEffect(() => {
-    localStorage.setItem("Lists", JSON.stringify(lists));
-  }, [lists]);
-
-  const handleTaskClick = (task, response, taskId) => {
-    setCardData((prevData) => ({
-      ...prevData,
-      taskName: "Card Name",
-    }));
-    setListsId(response);
-    setTaskIndex(taskId);
-    navigate(`/activity/${task.id}`);
-  };
-
-  return (
-    <StyledColumn className={styles.list}>
-      <div className={styles.container}>
+        };
+        
+        return (
+        <StyledColumn className={styles.list}>
+        <div className={styles.container}>
         <Typography variant="h6" className={styles.title}>
-          {list.name}
+        {list.name}
         </Typography>
         <div className={styles.actions}>
-          <PopupState variant="popover" popupId="demo-popup-popover">
-            {(popupState) => (
-              <div>
-              <IconButton {...bindTrigger(popupState)} className={styles.moreIconContainer}>
-                <MoreHorizIcon />
-              </IconButton>
-              <Popover
-                {...bindPopover(popupState)}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "center",
-                }}
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "center",
-                }}
-              >
-                <Typography sx={{ p: 2 }}>
-                  <Button onClick={() => handleListDelete(list.id)}>
-                    <DeleteIcon />
-                  </Button>
-                </Typography>
-              </Popover>
-            </div>
-          )}
+        <PopupState variant="popover" popupId="demo-popup-popover">
+        {(popupState) => (
+        <div>
+        <IconButton {...bindTrigger(popupState)} className={styles.moreIconContainer}>
+        <MoreHorizIcon />
+        </IconButton>
+        <Popover
+        {...bindPopover(popupState)}
+        anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+        }}
+        transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+        }}
+        >
+        <Typography sx={{ p: 2 }}>
+        <Button onClick={() => handleListDelete(list.id)}>
+        <DeleteIcon />
+        </Button>
+        </Typography>
+        </Popover>
+        </div>
+        )}
         </PopupState>
-      </div>
-    </div>
-    <div>
-      {list.tasks.map((task, taskIndex) => (
+        </div>
+        </div>
+        <div>
+        {list.tasks.map((task, taskIndex) => (
         <StyledColumn className={styles.task} key={taskIndex}>
-          <div className={styles.taskName} onClick={() => handleTaskClick(task, list.id, taskIndex)}>
-            {task.name}
-          </div>
-          <div className={styles.taskActions}>
-            <div className={styles.moreIconContainer}>
-              <PopupState variant="popover" popupId={`demo-popup-popover-${taskIndex}`}>
-                {(popupState) => (
-                  <div>
-                    <IconButton {...bindTrigger(popupState)} className={styles.moreIconButton}>
-                      <MoreHorizIcon className={styles.moreIcon} />
-                    </IconButton>
-                    <Popover
-                      {...bindPopover(popupState)}
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "center",
-                      }}
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "center",
-                      }}
-                    >
-                      <Typography sx={{ p: 2 }}>
-                        <Button onClick={() => handleCardDelete(task.id)}>
-                          <DeleteIcon />
-                        </Button>
-                      </Typography>
-                    </Popover>
-                  </div>
-                )}
-              </PopupState>
-            </div>
-          </div>
+        <div className={styles.taskName} onClick={() => handleTaskClick(task, list.id, taskIndex)}>
+        {task.name}
+        </div>
+        <div className={styles.taskActions}>
+        <div className={styles.moreIconContainer}>
+        <PopupState variant="popover" popupId={`demo-popup-popover-${taskIndex}`}>
+
+        {(popupState) => (
+        <div>
+        <IconButton {...bindTrigger(popupState)} className={styles.moreIconButton}>
+        <MoreHorizIcon className={styles.moreIcon} />
+        </IconButton>
+        <Popover
+        {...bindPopover(popupState)}
+        anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "center",
+        }}
+        transformOrigin={{
+        vertical: "top",
+        horizontal: "center",
+        }}
+        >
+        <Typography sx={{ p: 2 }}>
+        <Button onClick={() => handleCardDelete(task.id)}>
+        <DeleteIcon />
+        </Button>
+        </Typography>
+        </Popover>
+        </div>
+        )}
+        </PopupState>
+        </div>
+        <div className={styles.editIconContainer}>
+        <IconButton onClick={() => handleEditTask(task.id)}>
+        <EditIcon className={styles.editIcon} />
+        </IconButton>
+        </div>
+        </div>
         </StyledColumn>
-      ))}
-    </div>
-    {addingTaskIndex === listIndex ? (
-      <div className={styles.addTaskContainer}>
+        ))}
+        </div>
+        {addingTaskIndex === listIndex ? (
+        <div className={styles.addTaskContainer}>
         <div>
-          <TextField
-            className={styles.addTaskInput}
-            label="Task Name"
-            value={newTaskName}
-            onChange={(e) => setNewTaskName(e.target.value)}
-            variant="filled"
-            size="small"
-            autoFocus
-          />
+        <TextField
+        className={styles.addTaskInput}
+        label="Task Name"
+        value={newTaskName}
+        onChange={(e) => setNewTaskName(e.target.value)}
+        variant="filled"
+        size="small"
+        autoFocus
+        />
         </div>
         <div>
-          <Button className={styles.addTaskButton} variant="contained" startIcon={<AddIcon />} onClick={handleConfirmTask}>
-            Add
-          </Button>
-        </div>
+        <Button className={styles.addTaskButton} variant="contained" startIcon={<AddIcon />} onClick={handleConfirmTask}>
+          {editingTaskId ? "Update" : "Add"}
+        </Button>
       </div>
-    ) : (
-      <IconButton className={styles.addTaskButton} size="small" onClick={handleAddTask}>
-        <AddIcon /> Add a card
-      </IconButton>
-    )}
-  </StyledColumn>
-  );
+    </div>
+  ) : (
+    <IconButton className={styles.addTaskButton} size="small" onClick={handleAddTask}>
+      <AddIcon /> Add a card
+    </IconButton>
+  )}
+</StyledColumn>
+);
 };
 
-export default List;  
+export default List;
