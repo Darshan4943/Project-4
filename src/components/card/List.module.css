@@ -8,7 +8,10 @@
   .title {
     margin-right: 10px;
   }
-  
+  .editDeleteIcon {
+    padding: 0;
+    margin-left: 5px; 
+  }
   .list {
     background-color: #f8f8f8;
     position: relative;

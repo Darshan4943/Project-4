@@ -185,11 +185,10 @@ const List = ({ list, listIndex }) => {
         )}
         </PopupState>
         </div>
-        <div className={styles.editIconContainer}>
-        <IconButton onClick={() => handleEditTask(task.id)}>
-        <EditIcon className={styles.editIcon} />
-        </IconButton>
-        </div>
+        <IconButton className={styles.editDeleteIcon} onClick={() => handleEditTask(task.id)}>
+  <EditIcon className={styles.editIcon} />
+</IconButton>
+
         </div>
         </StyledColumn>
         ))}
