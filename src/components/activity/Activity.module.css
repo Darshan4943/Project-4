@@ -114,7 +114,9 @@
     margin-left: 0.5rem;
     color: #172b4d;
   }
-  
+  .storedDescription{
+    color: #172b4d;
+  }
   .detailsContent {
     padding-top: 1rem;
     border-top: 1px solid #dfe1e6;

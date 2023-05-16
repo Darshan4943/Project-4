@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/joy/Button";
-
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
@@ -10,8 +9,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import styles from "./Activity.module.css";
 import { useNavigate } from "react-router-dom";
-
-import DescriptionEditor from "./DescriptionEditor";
 import { useRecoilState } from "recoil";
 import { listId, listsState, tasksIndex } from "../card/atom";
 
@@ -23,12 +20,13 @@ export default function Activity() {
   const [showDescription, setShowDescription] = useState(false);
   const [showActivity, setShowActivity] = useState(false);
   const [showActivityDescription, setShowActivityDescription] = useState(false);
+  const [descriptionSaved, setDescriptionSaved] = useState(false); // Track if the description has been saved
 
-  const [listsid, setlistsId] = useRecoilState(listId);
+  const [listsId, setListsId] = useRecoilState(listId);
   const [editingDescription, setEditingDescription] = useState(false);
   const [taskIndex, setTaskIndex] = useRecoilState(tasksIndex);
   const navigate = useNavigate();
-  const [List, setList] = useRecoilState(listsState);
+  const [list, setList] = useRecoilState(listsState);
   const handleCloseDialog = () => {
     console.log("Dialog closed");
   };
@@ -52,31 +50,29 @@ export default function Activity() {
   const handleShowDescription = () => {
     setShowDescription(true);
   };
-  
-  const handleShowActive = () => {
+
+  const handleShowActivityDescription = () => {
     setShowActivityDescription(true);
   };
 
-  function addDescription() {
-    const newList = List.map((item) => {
-      if (item.id === listsid) {
-        const newTaskList = item.tasks.map((obj, index) => {
+  const addDescription = () => {
+    const newList = list.map((item) => {
+      if (item.id === listsId) {
+        const newTaskList = item.tasks.map((task, index) => {
           if (index === taskIndex) {
-            return { ...obj, description: description };
-          } else {
-            return obj;
+            return { ...task, description: description };
           }
+          return task;
         });
         return { ...item, tasks: newTaskList };
-      } else {
-        return item;
       }
+      return item;
     });
     setList(newList);
-    console.log(description);
     localStorage.setItem("Lists", JSON.stringify(newList));
-    setDescription("");
-  }
+    setShowDescription(false);
+    setDescriptionSaved(true); // Set descriptionSaved to true when the Save button is clicked
+  };
 
   const handleCancelDescription = () => {
     setEditingDescription(false);
@@ -105,101 +101,110 @@ export default function Activity() {
               size="small"
             >
               <CloseIcon onClick={() => navigate("/")} />
-            </IconButton>
-          </div>
-        </div>
-        <span className={styles.para}>in list To Do</span>
-        <div className={styles.notificationWatchContainer}>
-        <div className={styles.notification}>
-          <span className={styles.notificationText}>Notifications</span>
-        </div>
-        <div className={styles.watchButton}>
-          <Button variant="contained" onClick={handleToggleWatching}>
-            <VisibilityIcon />
-            {watching ? "Watching" : "Watch"}
-          </Button>
-        </div>
-      </div>
-      <div className={styles.des}>
-        <MenuIcon sx={{ marginRight: "1rem" }} /> <h4>Description</h4>
-        <div className={styles.watchButton1}>
-           <Button variant="contained" onClick={handleShowDescription}>Edit</Button>
-            
-          </div>
-      </div>
-      {showDescription ? (
-        <div className={styles.descriptionBox}>
-          <ReactQuill
-            value={description}
-            onChange={handleDescriptionChange}
-            placeholder="Add a more detailed description..."
-          />
-          <div className={styles.buttonContainer}>
-            <Button onClick={addDescription}>Save</Button>
-            <Button
+              </IconButton>
+              </div>
+              </div>
+              <span className={styles.para}>in list To Do</span>
+              <div className={styles.notificationWatchContainer}>
+              <div className={styles.notification}>
+              <span className={styles.notificationText}>Notifications</span>
+              </div>
+              <div className={styles.watchButton}>
+              <Button variant="contained" onClick={handleToggleWatching}>
+              <VisibilityIcon />
+              {watching ? "Watching" : "Watch"}
+              </Button>
+              </div>
+              </div>
+              <div className={styles.des}>
+              <MenuIcon sx={{ marginRight: "1rem" }} />
+              <h4>Description</h4>
+              <div className={styles.watchButton1}>
+              <Button variant="contained" onClick={handleShowDescription}>
+              Edit
+              </Button>
+              </div>
+              </div>
+              {showDescription ? (
+              <div className={styles.descriptionBox}>
+              <ReactQuill
+                         value={description}
+                         onChange={handleDescriptionChange}
+                         placeholder="Add a more detailed description..."
+                       />
+              <div className={styles.buttonContainer}>
+              <Button onClick={addDescription}>Save</Button>
+              <Button
               color="neutral"
               variant="soft"
               onClick={handleCancelDescription}
               sx={{ marginLeft: "0.5rem" }}
-            >
+              >
               Cancel
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <input
-          className={styles.firstInputBox}
-          placeholder="Add a more detailed description..."
-          onClick={handleShowDescription}
-        />
-      )}
+              </Button>
+              </div>
+              </div>
+              ) : (
+              <input
+                       className={styles.firstInputBox}
+                       placeholder="Add a more detailed description..."
+                       onClick={handleShowDescription}
+                     />
+              )}
+                  {/* Render the stored description if it has been saved */}
+    {descriptionSaved && (
+      <div className={styles.storedDescription}>
+        <h4>Description:</h4>
+        <div dangerouslySetInnerHTML={{ __html: description }} />
+      </div>
+    )}
 
-      <div className={styles.des}>
-        <ReceiptLongIcon sx={{ marginRight: "1rem" }} /> <h4>Activity</h4>
-        <div className={styles.watchButton1}>
-          <Button variant="contained" onClick={handleToggleDetails}>
-            {showDetails ? "Hide Details" : "Show Details"}
+    <div className={styles.des}>
+      <ReceiptLongIcon sx={{ marginRight: "1rem" }} />
+      <h4>Activity</h4>
+      <div className={styles.watchButton1}>
+        <Button variant="contained" onClick={handleToggleDetails}>
+          {showDetails ? "Hide Details" : "Show Details"}
+        </Button>
+      </div>
+    </div>
+    <span className={styles.username}>MC</span>
+    {showActivityDescription ? (
+      <div className={styles.activity}>
+        <ReactQuill
+          value={comment}
+          onChange={handleCommentChange}
+          placeholder="Write a Comment..."
+        />
+        <div className={styles.buttonContainer}>
+          <Button onClick={addDescription}>Save</Button>
+          <Button
+            color="neutral"
+            variant="soft"
+            onClick={handleCancelActivityDescription}
+            sx={{ marginLeft: "0.5rem" }}
+          >
+            Cancel
           </Button>
         </div>
       </div>
-      <span className={styles.username}>MC</span>
-      {showActivityDescription ? (
-        <div className={styles.activity}>
-          <ReactQuill
-            value={comment}
-            onChange={handleCommentChange}
-            placeholder="Write a Comment..."
-          />
-          <div className={styles.buttonContainer}>
-            <Button onClick={addDescription}>Save</Button>
-            <Button
-              color="neutral"
-              variant="soft"
-              onClick={handleCancelActivityDescription}
-              sx={{ marginLeft: "0.5rem" }}
-            >
-              Cancel
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <input
-          className={styles.secondInputBox}
-          placeholder="Write a Comment..."
-          onClick={handleShowActive}
-        />
-      )}
+    ) : (
+      <input
+        className={styles.secondInputBox}
+        placeholder="Write a Comment..."
+        onClick={handleShowActivityDescription}
+      />
+    )}
 
-      {showDetails && (
-        <div className={styles.detailsContent}>
-          <span className={styles.username}>MC</span>
-          <span className={styles.comments}>MC added this card to To Do</span>
-          <p className={styles.commentsTime}>5 minutes ago</p>
-        </div>
-      )}
-      <br /> <br />
-    </div>
-  </>
+    {showDetails && (
+      <div className={styles.detailsContent}>
+        <span className={styles.username}>MC</span>
+        <span className={styles.comments}>MC added this card to To Do</span>
+        <p className={styles.commentsTime}>5 minutes ago</p>
+      </div>
+    )}
+    <br /> <br />
+  </div>
+</>
 );
 }
-
