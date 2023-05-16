@@ -2,22 +2,36 @@ import React, { useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import { StyledColumn } from "./StyledComponents";
 import { useRecoilState } from "recoil";
-import { addingTaskIndexState, newTaskNameState, listsState, cardDataState, listId, tasksIndex } from "./atom";
-import { Typography, TextField, Button, IconButton, Popover } from "@mui/material";
+import {
+  addingTaskIndexState,
+  newTaskNameState,
+  listsState,
+  cardDataState,
+  listId,
+  tasksIndex,
+} from "./atom";
+import {
+  Typography,
+  TextField,
+  Button,
+  IconButton,
+  Popover,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import PopupState, { bindPopover, bindTrigger } from "material-ui-popup-state";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import styles from "./list.module.css"
-
+import styles from "./list.module.css";
+import DeleteIcon from "@mui/icons-material/Delete";
 const List = ({ list, listIndex }) => {
-  const [addingTaskIndex, setAddingTaskIndex] = useRecoilState(addingTaskIndexState);
+  const [addingTaskIndex, setAddingTaskIndex] =
+    useRecoilState(addingTaskIndexState);
   const [newTaskName, setNewTaskName] = useRecoilState(newTaskNameState);
   const [lists, setLists] = useRecoilState(listsState);
   const navigate = useNavigate();
   const [, setCardData] = useRecoilState(cardDataState);
-  const [, setListsId] = useRecoilState(listId); 
-  const [, setTaskIndex] = useRecoilState(tasksIndex); 
+  const [, setListsId] = useRecoilState(listId);
+  const [, setTaskIndex] = useRecoilState(tasksIndex);
 
   const handleAddTask = () => {
     setAddingTaskIndex(listIndex);
@@ -72,18 +86,18 @@ const List = ({ list, listIndex }) => {
       ...prevData,
       taskName: "Card Name",
     }));
-    setListsId(response); 
-    setTaskIndex(taskId); 
+    setListsId(response);
+    setTaskIndex(taskId);
     navigate(`/activity/${task.id}`);
   };
 
   return (
     <StyledColumn>
       <div style={{ display: "flex", alignItems: "center" }}>
-        <Typography variant="h6"  style={{ marginRight: "10px" }}>
+        <Typography variant="h6" style={{ marginRight: "10px" }}>
           {list.name}
         </Typography>
-        <div style={{ flex: 1 }}></div> 
+        <div style={{ flex: 1 }}></div>
         <PopupState variant="popover" popupId="demo-popup-popover">
           {(popupState) => (
             <div>
@@ -102,18 +116,24 @@ const List = ({ list, listIndex }) => {
                 }}
               >
                 <Typography sx={{ p: 2 }}>
-                  <button onClick={() => handleListDelete(list.id)}>Delete</button>
+                  <IconButton
+                    className={styles.button}
+                    style={{ padding: 0 }}
+                    onClick={(task) => handleCardDelete(task.id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
                 </Typography>
               </Popover>
             </div>
           )}
         </PopupState>
       </div>
-      <div >
+      <div>
         {list.tasks.map((task, taskIndex) => (
           <StyledColumn className="task" key={taskIndex}>
-           <div style={{ marginRight: "10px" }}
-           
+            <div
+              style={{ marginRight: "10px" }}
               onClick={() => handleTaskClick(task, list.id, taskIndex)}
             >
               {task.name}
@@ -124,23 +144,27 @@ const List = ({ list, listIndex }) => {
               {(popupState) => (
                 <div>
                   <Button variant="contained" {...bindTrigger(popupState)}>
-                    <MoreHorizIcon />
+                    <MoreHorizIcon sx={{ color: "white" }} />
                   </Button>
                   <Popover
                     {...bindPopover(popupState)}
                     anchorOrigin={{
                       vertical: "bottom",
-                      horizontal: "center",
+                      horizontal: "right",
                     }}
                     transformOrigin={{
                       vertical: "top",
-                      horizontal: "center",
+                      horizontal: "right",
                     }}
                   >
                     <Typography sx={{ p: 2 }}>
-                      <button className={styles.botton}onClick={() => handleCardDelete(task.id)}>
-                        Delete
-                      </button>
+                      <IconButton
+                        className={styles.button}
+                        style={{ padding: 0 }}
+                        onClick={() => handleCardDelete(task.id)}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
                     </Typography>
                   </Popover>
                 </div>
@@ -178,7 +202,6 @@ const List = ({ list, listIndex }) => {
       )}
     </StyledColumn>
   );
-  
-}
-          
-  export default List
+};
+
+export default List;

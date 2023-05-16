@@ -1,50 +1,21 @@
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f2f2f2;
-    padding: 10px 20px;
+
+
+/* .titleInput {
+  color: white;
+
+  .MuiInputBase-root {
+    width: 200px;
   }
-  
-  .name {
-    font-size: 20px;
+
+  .MuiInputBase-input {
     font-weight: bold;
   }
-  
-  .icon {
-    display: inline-block;
-    margin-left: 10px;
-    cursor: pointer;
+
+  .MuiInput-underline:before {
+    border-bottom: 1px solid white;
   }
-  
-  .icon svg {
-    vertical-align: middle;
+
+  .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 1px solid white;
   }
-  
-  .icon.starred svg {
-    color: rgb(231, 5, 145);
-  }
-  
-  .button {
-    display: flex;
-    align-items: center;
-  }
-  
-  .userImage {
-    border-radius: 50%;
-    margin-right: 10px;
-  }
-  
-  .share {
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .share:hover {
-    background-color: #45a049;
-  }
+} */

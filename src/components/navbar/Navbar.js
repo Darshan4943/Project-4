@@ -24,7 +24,7 @@ function Navbar() {
     <div className={style.navbar}>
       <div className={style.logoContainer}>
         <BsGrid3X3GapFill className={style.logo} />
-        <span className={style.logoText}></span>
+        <span className={style.logoText}>Trello</span>
       </div>
       
       <div className={style.menuContainer}>
