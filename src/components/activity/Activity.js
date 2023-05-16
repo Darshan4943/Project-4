@@ -17,7 +17,7 @@ import { listId, listsState, tasksIndex } from "../card/atom";
 
 export default function Activity() {
   const [showDetails, setShowDetails] = useState(false);
-  const [watching, setWatching] = useState(false); 
+  const [watching, setWatching] = useState(false);
   const [description, setDescription] = useState("");
   const [comment, setComment] = useState("");
   const [showDescription, setShowDescription] = useState(false);
@@ -52,24 +52,21 @@ export default function Activity() {
   const handleShowDescription = () => {
     setShowDescription(true);
   };
+  
   const handleShowActive = () => {
     setShowActivityDescription(true);
   };
-  
+
   function addDescription() {
     const newList = List.map((item) => {
       if (item.id === listsid) {
         const newTaskList = item.tasks.map((obj, index) => {
           if (index === taskIndex) {
             return { ...obj, description: description };
-            
           } else {
-
             return obj;
           }
-          
         });
-        
         return { ...item, tasks: newTaskList };
       } else {
         return item;
@@ -80,15 +77,17 @@ export default function Activity() {
     localStorage.setItem("Lists", JSON.stringify(newList));
     setDescription("");
   }
-  
 
   const handleCancelDescription = () => {
     setEditingDescription(false);
     setShowDescription(false);
-    
     setDescription("");
   };
 
+  const handleCancelActivityDescription = () => {
+    setShowActivityDescription(false);
+    setComment("");
+  };
 
   return (
     <>
@@ -105,100 +104,102 @@ export default function Activity() {
               color="neutral"
               size="small"
             >
-              <CloseIcon onClick={() => navigate('/')} />
+              <CloseIcon onClick={() => navigate("/")} />
             </IconButton>
           </div>
         </div>
         <span className={styles.para}>in list To Do</span>
         <div className={styles.notificationWatchContainer}>
-          <div className={styles.notification}>
-            <span className={styles.notificationText}>Notifications</span>
-          </div>
-          <div className={styles.watchButton}>
-            <Button variant="contained" onClick={handleToggleWatching}>
-              <VisibilityIcon />
-              {watching ? "Watching" : "Watch"}
-            </Button>
-          </div>
+        <div className={styles.notification}>
+          <span className={styles.notificationText}>Notifications</span>
         </div>
-        <div className={styles.des}>
-          <MenuIcon sx={{ marginRight: "1rem" }} /> <h4>Description</h4>
-        </div>
-        {showDescription ? (
-          <div className={styles.descriptionBox}>
-            <ReactQuill
-              value={description}
-              onChange={handleDescriptionChange}
-              placeholder="Add a more detailed description..."
-            />
-            <div className={styles.buttonContainer}>
-            <Button   onClick={addDescription}>
-            Save
+        <div className={styles.watchButton}>
+          <Button variant="contained" onClick={handleToggleWatching}>
+            <VisibilityIcon />
+            {watching ? "Watching" : "Watch"}
           </Button>
-          
-              <Button color="neutral"  variant="soft" onClick={handleCancelDescription} sx={{ marginLeft: "0.5rem" }}>
-                Cancel
-              </Button>
-            </div>
+        </div>
+      </div>
+      <div className={styles.des}>
+        <MenuIcon sx={{ marginRight: "1rem" }} /> <h4>Description</h4>
+        <div className={styles.watchButton1}>
+           <Button variant="contained" onClick={handleShowDescription}>Edit</Button>
+            
           </div>
-        ) : (
-          <input
-            className={styles.firstInputBox}
+      </div>
+      {showDescription ? (
+        <div className={styles.descriptionBox}>
+          <ReactQuill
+            value={description}
+            onChange={handleDescriptionChange}
             placeholder="Add a more detailed description..."
-            onClick={handleShowDescription}
           />
-        )}
-       
-        <div className={styles.des}>
-          <ReceiptLongIcon sx={{ marginRight: "1rem" }} /> <h4>Activity</h4>
-          <div className={styles.watchButton1}>
-            <Button variant="contained" onClick={handleToggleDetails}>
-              {showDetails ? "Hide Details" : "Show Details"}
+          <div className={styles.buttonContainer}>
+            <Button onClick={addDescription}>Save</Button>
+            <Button
+              color="neutral"
+              variant="soft"
+              onClick={handleCancelDescription}
+              sx={{ marginLeft: "0.5rem" }}
+            >
+              Cancel
             </Button>
           </div>
         </div>
-        <span className={styles.username}>MC</span>
-        {showActivityDescription ? (
-          <div className={styles.activity}>
-            <ReactQuill
-              value={description}
-              onChange={handleDescriptionChange}
-              placeholder="Write a Comment..."
-            />
-            <div className={styles.buttonContainer}>
-              <Button  onClick={addDescription}>
-                Save
-              </Button>
-              <Button
-                color="neutral"
-                variant="soft"
-                onClick={handleCancelDescription}
-                sx={{ marginLeft: "0.5rem" }}
-              >
-                Cancel
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <input
-            className={styles.secondInputBox}
+      ) : (
+        <input
+          className={styles.firstInputBox}
+          placeholder="Add a more detailed description..."
+          onClick={handleShowDescription}
+        />
+      )}
+
+      <div className={styles.des}>
+        <ReceiptLongIcon sx={{ marginRight: "1rem" }} /> <h4>Activity</h4>
+        <div className={styles.watchButton1}>
+          <Button variant="contained" onClick={handleToggleDetails}>
+            {showDetails ? "Hide Details" : "Show Details"}
+          </Button>
+        </div>
+      </div>
+      <span className={styles.username}>MC</span>
+      {showActivityDescription ? (
+        <div className={styles.activity}>
+          <ReactQuill
+            value={comment}
+            onChange={handleCommentChange}
             placeholder="Write a Comment..."
-            onClick={handleShowActive}
           />
-        )}
-        
-            
-           
-            
-        {showDetails && (
-          <div className={styles.detailsContent}>
+          <div className={styles.buttonContainer}>
+            <Button onClick={addDescription}>Save</Button>
+            <Button
+              color="neutral"
+              variant="soft"
+              onClick={handleCancelActivityDescription}
+              sx={{ marginLeft: "0.5rem" }}
+            >
+              Cancel
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <input
+          className={styles.secondInputBox}
+          placeholder="Write a Comment..."
+          onClick={handleShowActive}
+        />
+      )}
+
+      {showDetails && (
+        <div className={styles.detailsContent}>
           <span className={styles.username}>MC</span>
           <span className={styles.comments}>MC added this card to To Do</span>
           <p className={styles.commentsTime}>5 minutes ago</p>
-          </div>
-          )}
-          <br /> <br />
-          </div>
-          </>
-          );
-          }
+        </div>
+      )}
+      <br /> <br />
+    </div>
+  </>
+);
+}
+
