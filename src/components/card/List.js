@@ -15,7 +15,8 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import PopupState, { bindPopover, bindTrigger } from "material-ui-popup-state";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import styles from "./List.module.css";
 
 const List = ({ list, listIndex }) => {
@@ -85,108 +86,105 @@ const List = ({ list, listIndex }) => {
   };
 
   return (
-    <StyledColumn>
+    <StyledColumn className={styles.list}>
       <div className={styles.container}>
         <Typography variant="h6" className={styles.title}>
           {list.name}
         </Typography>
-        <div className={styles.actions}></div>
-        <PopupState variant="popover" popupId="demo-popup-popover">
-          {(popupState) => (
-            <div>
-              <Button variant="contained" {...bindTrigger(popupState)}>
+        <div className={styles.actions}>
+          <PopupState variant="popover" popupId="demo-popup-popover">
+            {(popupState) => (
+              <div>
+              <IconButton {...bindTrigger(popupState)} className={styles.moreIconContainer}>
                 <MoreHorizIcon />
-              </Button>
+              </IconButton>
               <Popover
                 {...bindPopover(popupState)}
                 anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "center",
+                  vertical: "bottom",
+                  horizontal: "center",
                 }}
                 transformOrigin={{
-                vertical: "top",
-                horizontal: "center",
+                  vertical: "top",
+                  horizontal: "center",
                 }}
-                >
+              >
                 <Typography sx={{ p: 2 }}>
-                <button onClick={() => handleListDelete(list.id)}>Delete</button>
+                  <Button onClick={() => handleListDelete(list.id)}>
+                    <DeleteIcon />
+                  </Button>
                 </Typography>
-                </Popover>
-                </div>
-                )}
-                </PopupState>
-                </div>
-                <div>
-                {list.tasks.map((task, taskIndex) => (
-                  <StyledColumn className={`${styles.task}`} key={taskIndex}>
-
-                  <div className={`${styles["task-name"]}`} onClick={() => handleTaskClick(task, list.id, taskIndex)}>
-
-                {task.name}
-                </div>
-                <div className={styles["task-actions"]}></div>
-                <PopupState variant="popover" popupId="demo-popup-popover">
+              </Popover>
+            </div>
+          )}
+        </PopupState>
+      </div>
+    </div>
+    <div>
+      {list.tasks.map((task, taskIndex) => (
+        <StyledColumn className={styles.task} key={taskIndex}>
+          <div className={styles.taskName} onClick={() => handleTaskClick(task, list.id, taskIndex)}>
+            {task.name}
+          </div>
+          <div className={styles.taskActions}>
+            <div className={styles.moreIconContainer}>
+              <PopupState variant="popover" popupId={`demo-popup-popover-${taskIndex}`}>
                 {(popupState) => (
-                <div>
-                <Button variant="contained" {...bindTrigger(popupState)}>
-                <MoreHorizIcon />
-                </Button>
-                <Popover
-                {...bindPopover(popupState)}
-                anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "center",
-                }}
-                transformOrigin={{
-                vertical: "top",
-                horizontal: "center",
-                }}
-                >
-                <Typography sx={{ p: 2 }}>
-                <button onClick={() => handleCardDelete(task.id)}>Delete</button>
-                </Typography>
-                </Popover>
-                </div>
+                  <div>
+                    <IconButton {...bindTrigger(popupState)} className={styles.moreIconButton}>
+                      <MoreHorizIcon className={styles.moreIcon} />
+                    </IconButton>
+                    <Popover
+                      {...bindPopover(popupState)}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "center",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                      }}
+                    >
+                      <Typography sx={{ p: 2 }}>
+                        <Button onClick={() => handleCardDelete(task.id)}>
+                          <DeleteIcon />
+                        </Button>
+                      </Typography>
+                    </Popover>
+                  </div>
                 )}
-                </PopupState>
-                </StyledColumn>
-                ))}
-                </div>
-                {addingTaskIndex === listIndex ? (
-                <div className={styles["add-task-container"]}>
-                <div>
-                <TextField
-                className={styles["add-task-input"]}
-                label="Task Name"
-                value={newTaskName}
-                onChange={(e) => setNewTaskName(e.target.value)}
-                variant="filled"
-                size="small"
-                autoFocus
-                />
-                </div>
-                <div>
-                <Button
-                className={styles["add-task-button"]}
-                variant="contained"
-                startIcon={<AddIcon />}
-                onClick={handleConfirmTask}
-                >
-                Add
-                </Button>
-                </div>
-                </div>
-                ) : (
-                <IconButton
-                className={styles["add-task-button"]}
-                size="small"
-                onClick={handleAddTask}
-                >
-                + Add a card
-                </IconButton>
-                )}
-                </StyledColumn>
-                );
-                };
-                
-                export default List;
+              </PopupState>
+            </div>
+          </div>
+        </StyledColumn>
+      ))}
+    </div>
+    {addingTaskIndex === listIndex ? (
+      <div className={styles.addTaskContainer}>
+        <div>
+          <TextField
+            className={styles.addTaskInput}
+            label="Task Name"
+            value={newTaskName}
+            onChange={(e) => setNewTaskName(e.target.value)}
+            variant="filled"
+            size="small"
+            autoFocus
+          />
+        </div>
+        <div>
+          <Button className={styles.addTaskButton} variant="contained" startIcon={<AddIcon />} onClick={handleConfirmTask}>
+            Add
+          </Button>
+        </div>
+      </div>
+    ) : (
+      <IconButton className={styles.addTaskButton} size="small" onClick={handleAddTask}>
+        <AddIcon /> Add a card
+      </IconButton>
+    )}
+  </StyledColumn>
+  );
+};
+
+export default List;  
