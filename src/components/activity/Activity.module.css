@@ -1,14 +1,9 @@
-/* activity.module.css */
-
 .mainDiv {
-    margin: 0 30%;
-    border: 1px solid;
+    margin: 0 auto;
     width: 40rem;
     height: 50rem;
     padding: 0 1.5rem;
     border-radius: 0.5rem;
-    z-index: 10000;
-    overflow: auto;
     background-color: #f4f5f7;
   }
   
@@ -23,20 +18,8 @@
     color: #172b4d;
   }
   
-  .notificationWatchContainer {
-    display: flex;
-    align-items: center;
-    margin-top: 1rem;
-  }
-  
-  .watchButton {
-    display: flex;
-    flex-direction: column;
-    margin-left: 15rem;
-  }
-  
-  .watchButton:hover {
-    background-color: #e4e7ec;
+  .closeButton {
+    margin-right: 1rem;
   }
   
   .para {
@@ -44,11 +27,36 @@
     color: #5e6c84;
   }
   
+  .notificationWatchContainer {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+  }
+  
+  .notification {
+    margin-right: 1rem;
+  }
+  
+  .notificationText {
+    color: #172b4d;
+  }
+  
+  .watchButton {
+    display: flex;
+    align-items: center;
+  }
+  
+  .watchButton button {
+    margin-left: 0.5rem;
+    color: #172b4d;
+  }
+  
   .des {
     margin-top: 1rem;
     margin-bottom: 0;
     display: flex;
     align-items: center;
+    color: #172b4d;
   }
   
   .username {
@@ -98,12 +106,13 @@
   
   .watchButton1 {
     display: flex;
-    flex-direction: column;
-    margin-left: 15rem;
+    align-items: center;
+    color: #172b4d;
   }
   
-  .watchButton1:hover {
-    background-color: #e4e7ec;
+  .watchButton1 button {
+    margin-left: 0.5rem;
+    color: #172b4d;
   }
   
   .detailsContent {

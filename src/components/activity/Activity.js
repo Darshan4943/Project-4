@@ -22,6 +22,8 @@ export default function Activity() {
   const [comment, setComment] = useState("");
   const [showDescription, setShowDescription] = useState(false);
   const [showActivity, setShowActivity] = useState(false);
+  const [showActivityDescription, setShowActivityDescription] = useState(false);
+
   const [listsid, setlistsId] = useRecoilState(listId);
   const [editingDescription, setEditingDescription] = useState(false);
   const [taskIndex, setTaskIndex] = useRecoilState(tasksIndex);
@@ -50,6 +52,10 @@ export default function Activity() {
   const handleShowDescription = () => {
     setShowDescription(true);
   };
+  const handleShowActive = () => {
+    setShowActivityDescription(true);
+  };
+  
   function addDescription() {
     const newList = List.map((item) => {
       if (item.id === listsid) {
@@ -82,9 +88,7 @@ export default function Activity() {
     
     setDescription("");
   };
-  const handleShowActive = () => {
-    setShowActivity(true);
-  };
+
 
   return (
     <>
@@ -154,23 +158,37 @@ export default function Activity() {
           </div>
         </div>
         <span className={styles.username}>MC</span>
-        {showActivity ? (
+        {showActivityDescription ? (
           <div className={styles.activity}>
             <ReactQuill
               value={description}
               onChange={handleDescriptionChange}
               placeholder="Write a Comment..."
             />
+            <div className={styles.buttonContainer}>
+              <Button  onClick={addDescription}>
+                Save
+              </Button>
+              <Button
+                color="neutral"
+                variant="soft"
+                onClick={handleCancelDescription}
+                sx={{ marginLeft: "0.5rem" }}
+              >
+                Cancel
+              </Button>
+            </div>
           </div>
         ) : (
           <input
             className={styles.secondInputBox}
             placeholder="Write a Comment..."
             onClick={handleShowActive}
-            />
-            )}
+          />
+        )}
+        
             
-
+           
             
         {showDetails && (
           <div className={styles.detailsContent}>
