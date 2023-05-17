@@ -20,7 +20,9 @@ export default function Activity() {
   const [activity, setActivity] = useState("");
   const [showDescription, setShowDescription] = useState(false);
   const [showActivity, setShowActivity] = useState(false);
-  const [listsid, setlistsId] = useRecoilState(listId);
+ 
+  const [listid, setListsId] = useRecoilState(listId);
+
   const [taskIndex, setTaskIndex] = useRecoilState(tasksIndex);
   const navigate = useNavigate();
   const [List, setList] = useRecoilState(listsState);
@@ -51,7 +53,7 @@ export default function Activity() {
 
   const addDescription = () => {
     const newList = List.map((item) => {
-      if (item.id === listsid) {
+      if (item.id === listid) {
         const newTaskList = item.tasks.map((obj, index) => {
           if (index === taskIndex) {
             return { ...obj, description: description };
@@ -73,7 +75,7 @@ export default function Activity() {
   const addActivity = () => {
     const newActivity = { comment: activity };
     const newList = List.map((item) => {
-      if (item.id === listsid) {
+      if (item.id === listid) {
         const newTaskList = item.tasks.map((obj, index) => {
           if (index === taskIndex) {
             const updatedActivity = obj.activity ? [...obj.activity, newActivity] : [newActivity];
@@ -112,7 +114,7 @@ export default function Activity() {
   };
 
   const getTask = () => {
-    const currentList = List.find((item) => item.id === listsid);
+    const currentList = List.find((item) => item.id === listid);
     if (currentList && currentList.tasks && currentList.tasks.length > taskIndex) {
       return currentList.tasks[taskIndex];
     }
@@ -232,7 +234,7 @@ export default function Activity() {
           <>
             {savedActivity && savedActivity.length > 0 ? (
               <div className={styles.savedActivity}>
-                <Button className={styles.btn} onClick={handleShowActive}>Add Comment</Button>
+                <Button className={styles.addCommentButton} onClick={handleShowActive}>Add Comment</Button>
                 {savedActivity.map((comment, index) => (
                   <div
                     key={index}

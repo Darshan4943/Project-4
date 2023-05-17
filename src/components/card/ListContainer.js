@@ -1,25 +1,23 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import { useRecoilValue } from 'recoil';
-import List from './List';
-import { addingTaskIndexState, newTaskNameState } from './atom';
-import { DragDropContext } from 'react-beautiful-dnd';
 
-const ListContainer = ({ lists }) => {
-  const addingTaskIndex = useRecoilValue(addingTaskIndexState);
-  const newTaskName = useRecoilValue(newTaskNameState);
+import List from './List';
+import { useRecoilState } from 'recoil';
+import { listsState } from './atom';
+
+
+const ListContainer = () => {
+  const [lists, setLists] = useRecoilState(listsState);
 
   return (
-    <DragDropContext>
-    <>
+    <Grid container spacing={2}>
       {lists.map((list, index) => (
         <Grid item xs={4} key={list.id}> 
-          <List list={list} listIndex={index}  />
+          <List list={list} listIndex={index} />
         </Grid>
       ))}
-    </>
-  </DragDropContext>
-  );
+    </Grid>
+  )
 };
 
 export default ListContainer;
