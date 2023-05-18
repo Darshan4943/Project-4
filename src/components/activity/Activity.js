@@ -453,19 +453,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/joy/Button";
@@ -578,7 +565,9 @@ export default function Activity() {
     setShowActivity(true);
   };
 
-  const card = List.find((item) => item.id === listsid)?.tasks[taskIndex];
+  const list = List.find((item) => item.id === listsid);
+  const card = list?.tasks[taskIndex];
+  const listName = list ? list.name : "";
   const cardName = card ? card.name : "";
 
   const navigateToList = () => {
@@ -591,7 +580,7 @@ export default function Activity() {
         <div className={styles.title}>
           <h2 className={styles.head}>
             <span className={styles.codeZingerIcon}></span>
-            {cardName}
+            {cardName} from -{listName}
           </h2>
           <div className={styles.closeButton}>
             <IconButton
