@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { Grid, Button, IconButton, TextField } from "@mui/material";
 
 import { useRecoilState } from "recoil";
-import { newListNameState, showAddListState, listsState } from "./atom";
+import { newListNameState, showAddListState, listsState } from "../recoil/atom";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { v4 as uuid } from "uuid";
 import { StyledColumn } from "./StyledComponents";
+import { FaBlackTie } from "react-icons/fa";
+import style from "./AddList.module.css";
 
 const AddList = () => {
   const [newListName, setNewListName] = useRecoilState(newListNameState);
@@ -47,8 +49,8 @@ const AddList = () => {
                 size="small"
               />
             </div>
-            <Button
-              variant="contained"
+            <Button 
+                 
               startIcon={<AddIcon />}
               onClick={handleAddList}
             >
@@ -64,6 +66,7 @@ const AddList = () => {
           <StyledColumn>
             <div className="add-list-button">
               <Button
+                 id={style.Btn} 
                 variant="contained"
                 startIcon={<AddIcon />}
                 onClick={() => setShowAddList(true)}

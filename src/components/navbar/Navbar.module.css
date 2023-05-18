@@ -1,19 +1,31 @@
-.navbar {
+/* .navbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; 
     align-items: center;
     height: 60px;
     padding: 0 20px;
-    background-color: #026aa7;
+    /* background-color: #026aa7; */
+    /* background-color: rgba(0, 0, 0, 0.616);
     color: #fff;
+  } */
+  
+ 
+  /* .name {
+    border-color:yellow;
+     display: flex; 
+    font-size: 20px;
+    font-weight:bold;
+    padding:10px;
+    /* margin-right: 10px; */
+    /* align-items:center;
   }
   .logoContainer {
     display: flex;
     align-items: center;
   }
-  .logo {
+   .logo {
     font-size: 24px;
-    margin-right: 10px;
+    margin-right: 10px; 
   }
   .logoText {
     font-size: 20px;
@@ -39,6 +51,7 @@
   .menuContainer {
     display: flex;
     align-items: center;
+    margin-right: 20rem;
   }
   .menuButton {
     background-color: transparent;
@@ -53,24 +66,24 @@
   .buttonContainer {
     display: flex;
     align-items: center;
-  }
+  } */
   
-  .iconButton {
-    background-color: transparent;
+  /* .iconButton { */
+    /* background-color: transparent;
     border: none;
     cursor: pointer;
     padding: 5px;
-  }
-  .icon {
+  } */
+  /* .icon {
     font-size: 20px;
     color: #fff;
     opacity: 0.7;
     transition: opacity 0.3s;
-  }
-  .iconButton:hover .icon {
+  } */ */
+  /* .iconButton:hover .icon {
     opacity: 1;
-  }
-  .addButton {
+  } */
+  /* .addButton {
     display: flex;
     align-items: center;
     background-color: #5aac44;
@@ -83,16 +96,16 @@
   .addIcon {
     font-size: 18px;
     margin-right: 5px;
-  }
-  .addText {
+  } */
+  /* .addText {
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
     white-space: nowrap;
     color: #fff;
     letter-spacing: 1px;
-  }
-  .dropdown {
+  } */
+  /* .dropdown {
     position: relative;
     display: inline-block;
   }
@@ -126,4 +139,42 @@
   .arrowIcon {
     font-size: 12px;
     margin-left: 5px;
+  }
+  .userImage {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  .button {
+    display: flex;
+    align-items: center;
+  }
+   */ 
+   #whiteBtn{
+    background-color: white;
+    color: black;
+    }
+  #whiteBtn:hover{
+     background-color: rgb(50, 97, 122);
+     color: white;
+  }
+   
+   
+   .titleInput {
+    color: white;
+  
+    .MuiInputBase-root {
+      width: 200px;
+    }
+  
+    .MuiInputBase-input {
+      font-weight: bold;
+    }
+  
+    .MuiInput-underline:before {
+      border-bottom: 1px solid white;
+    }
+  
+    .MuiInput-underline:hover:not(.Mui-disabled):before {
+      border-bottom: 1px solid white;
+    }
   }

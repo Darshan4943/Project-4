@@ -1,8 +1,36 @@
 .image{
-    background: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/33b3ef2cfb29119c7974dcbab0a6cd47/photo-1683125554888-33d34e38ddea.jpg");
-    background-size: 100% auto;
+    /* background: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2400x1600/33b3ef2cfb29119c7974dcbab0a6cd47/photo-1683125554888-33d34e38ddea.jpg"); */
+    background-size: cover;
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center;
     height: 100vh;
     width: 100vw;
+    /* animation: change 10s infinite ease-in-out;  */
   }
+
+  /* @keyframes change{
+    0%
+    {
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRztjqv5EoWf3mF9IotZH0san5KLBylqeTW7xffg-NO5Q&usqp=CAU&ec=48665698");
+    }
+    20%
+    {
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDQTLHl8AiAOx8PAai-TUlRMJlTSdzobMKRGG63KgE1w&usqp=CAU&ec=48665698');
+    }
+    40%
+    {
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6T2y5YSLP2SbfeYCNSRVE3fXmQnVArTW3HkTC08grjw&usqp=CAU&ec=48665698');
+    }
+    60%
+    {
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpQJjZrTAw78DPsUx1UoEGPn2Xrle9g9gbrxcjeq_-rQ&usqp=CAU&ec=48665698');
+    }
+    80%
+    {
+        background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB-A1jRyQGz9QfYZ1d9vB2mTMgg0ZQSeiIlC5OYKXRkg&usqp=CAU&ec=48665698');
+    }
+    /* 100%
+    {
+        background-image: url(images/img1.jpg);
+    } */
+  /* } */

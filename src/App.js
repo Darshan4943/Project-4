@@ -4,6 +4,7 @@ import Nav from './components/layout/Layout';
 import styles from "./App.module.css"
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Activity from './components/activity/Activity';
+import Template from './components/Templates/Templates'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<KanbanUI />} />
           <Route path="/activity/:taskId" element={<Activity />} />
+          <Route path="/template" element={<Template />} />
         </Routes>
       </div>
     </BrowserRouter>

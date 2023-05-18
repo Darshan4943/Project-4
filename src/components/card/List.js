@@ -2,10 +2,11 @@ import React, { useEffect } from "react";
 import { v4 as uuid } from "uuid"; // Import UUID library
 import { StyledColumn } from "./StyledComponents";
 import { useRecoilState } from "recoil";
-import { addingTaskIndexState, newTaskNameState, listsState, cardDataState } from "./atom";
+import { addingTaskIndexState, newTaskNameState, listsState, cardDataState } from "../recoil/atom";
 import { Typography, TextField, Button, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { Navigate, json, useNavigate } from "react-router-dom";
+import style from './List.module.css';
 
 const List = ({ list, listIndex }) => {
   const [addingTaskIndex, setAddingTaskIndex] =
@@ -85,6 +86,7 @@ const List = ({ list, listIndex }) => {
             </div>
             <div>
               <Button
+              id={style.icon}
                 variant="contained"
                 startIcon={<AddIcon />}
                 onClick={handleConfirmTask}
@@ -94,7 +96,7 @@ const List = ({ list, listIndex }) => {
             </div>
           </div>
         ) : (
-          <IconButton size="small" onClick={handleAddTask}>
+          <IconButton  size="small" onClick={handleAddTask}>
             + Add a card
           </IconButton>
         )}

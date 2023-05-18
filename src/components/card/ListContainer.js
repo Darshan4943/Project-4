@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import { useRecoilValue } from 'recoil';
 import List from './List';
-import { addingTaskIndexState, newTaskNameState } from './atom';
+import { addingTaskIndexState, newTaskNameState } from '../recoil/atom';
 
 const ListContainer = ({ lists }) => {
   const addingTaskIndex = useRecoilValue(addingTaskIndexState);

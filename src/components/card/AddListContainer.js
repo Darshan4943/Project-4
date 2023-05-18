@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import AddList from './AddList';
 import { useRecoilValue } from 'recoil';
-import { newListNameState } from './atom';
+import { newListNameState } from '../recoil/atom';
 
 const AddListContainer = () => {
   const newListName = useRecoilValue(newListNameState);
