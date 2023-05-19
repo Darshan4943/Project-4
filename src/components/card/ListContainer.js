@@ -2,18 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import List from './List';
-import { addingTaskIndexState, listsState, newTaskNameState } from './atom';
+import { addingTaskIndexState, destinationState, draggableState, listsState, newTaskNameState, sourceState } from './atom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import styles from "./listContainer.module.css"
 const ListContainer = () => {
   const [lists, setLists] = useRecoilState(listsState);
   const [num, setNum] = useState(0);
+  const [dragId, setDragId] = useRecoilState(draggableState);
+  const [sourceId, setSourceId] = useRecoilState(sourceState);
+  const [destinationId, setDestinationId] = useRecoilState(destinationState);
   useEffect(()=>{setNum(Math.floor(Math.random() * 100).toString())},[lists])
  
   const handleDragEnd = (result) => {
-    const { destination, source, draggableId, type } = result;
-  
+    const { destination, source,  type } = result;
+    setDragId(result.draggableId)
+    setSourceId(source.droppableId)
+    setDestinationId(destination.droppableId)
     if (!destination) {
       return;
     }
@@ -26,15 +31,11 @@ const ListContainer = () => {
     }
   
     if (type === 'list') {
-      const newListOrder = Array.from(lists);
-      const movedList = newListOrder.splice(source.index, 1)[0];
-      newListOrder.splice(destination.index, 0, movedList);
+      // const newListOrder = Array.from(lists);
+      // const movedList = newListOrder.splice(source.index, 1)[0];
+      // newListOrder.splice(destination.index, 0, movedList);
   
-      setLists(newListOrder);
-    }
-  
-   
-    if (type === "task") {
+      // setLists(newListOrder);
       const reorderedStores = [...lists];
 
       const storeSourceIndex = source.index;
@@ -46,6 +47,9 @@ const ListContainer = () => {
 
       return setLists(reorderedStores);
     }
+  
+   
+   
     const itemSourceIndex = source.index;
     const itemDestinationIndex = destination.index;
 
@@ -60,7 +64,7 @@ const ListContainer = () => {
 const destinationList = lists[storeDestinationIndex];
 
 if (!sourceList || !destinationList) {
-  
+ 
   return;
 }
 

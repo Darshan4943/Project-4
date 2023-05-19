@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/joy/Button";
 import { StyledColumn } from "../card/StyledComponents";
@@ -11,10 +11,10 @@ import "react-quill/dist/quill.snow.css";
 import styles from "./Activity.module.css";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { listId, listName, listsState, newIndex, taskName, tasksIndex } from "../card/atom";
+import { destinationState, draggableState, listId, listName, listsState, newIndex, sourceState, taskName, tasksIndex } from "../card/atom";
 import Avatar from "@mui/material/Avatar";
 import { formatDistanceToNow } from "date-fns";
-
+import TrendingFlatIcon from "@mui/icons-material/TrendingFlat";
 
 export default function Activity() {
   const [showDetails, setShowDetails] = useState(false);
@@ -32,6 +32,40 @@ export default function Activity() {
   const [TaskName, setTaskName] = useRecoilState(taskName);
   const [ListName, setListName] = useRecoilState(listName);
   const commentTime = new Date(comments.time);
+  const [dragId, setDragId] = useRecoilState(draggableState);
+  const [sourceId, setSourceId] = useRecoilState(sourceState);
+  const [destinationId, setDestinationId] = useRecoilState(destinationState);
+
+  const [names,setNames] =useState("")
+  useEffect(() => {
+    List.map((item) => {
+      if (item.id === sourceId) {
+        setNames(item.name);
+      }
+    });
+  }, [sourceId]);
+
+  useEffect(() => {
+    let newList = List.map((item) => {
+      if (item.id === destinationId) {
+        console.log(names)
+        let newTasklist = item.tasks.map((obj) => {
+          if (obj.id === dragId && names) {
+            console.log(dragId)
+            return { ...obj, details: [...obj.details, names] };
+          } else {
+            return obj;
+          }
+        });
+        return { ...item, tasks: newTasklist };
+      } else {
+        return item;
+      }
+    });
+    setList(newList);
+    localStorage.setItem("Lists", JSON.stringify(newList));
+  }, [names, sourceId, destinationId]);
+
   const handleCloseDialog = () => {
     console.log("Dialog closed");
   };
@@ -80,7 +114,7 @@ export default function Activity() {
   };
 
   const addActivity = () => {
-    const newActivity = { comment: activity, user: "Darshan", time: new Date() };
+    const newActivity = { comment: activity, user: "Darshan", time: new Date()  };
     const newList = List.map((item) => {
       if (item.id === listid) {
         const newTaskList = item.tasks.map((obj, index) => {
@@ -122,16 +156,14 @@ export default function Activity() {
   const currentTask = List.find((item) => item.id === listid)?.tasks?.[newindex];
   const currentDescription = currentTask?.description;
   const currentActivity = currentTask?.activity;
-
+  const currentDetails =currentTask?.details;
   return (
     <>
       <div className={styles.mainDiv}>
         <div className={styles.title}>
           <h2 className={styles.head}>
             <span></span>💻 {TaskName}
-           
           </h2>
-          
           <div className={styles.closeButton}>
             <IconButton
               aria-label="close dialog"
@@ -158,8 +190,8 @@ export default function Activity() {
         </div>
         <div className={styles.des}>
           <MenuIcon sx={{ marginRight: "1rem" }} /> <h4>Description</h4>
-          <div className={styles.watchButton1}>
-            <Button variant="contained" onClick={handleShowDescription}>
+          <div className={styles.editButton}>
+            <Button  variant="contained" onClick={handleShowDescription}>
               Edit
             </Button>
           </div>
@@ -196,10 +228,10 @@ export default function Activity() {
             )}
           </>
         )}
-
+  
         <div className={styles.des}>
           <ReceiptLongIcon sx={{ marginRight: "1rem" }} /> <h4>Activity</h4>
-          <div className={styles.watchButton1}>
+          <div className={styles.editButton1}>
             <Button variant="contained" onClick={handleToggleDetails}>
               {showDetails ? "Hide Details" : "Show Details"}
             </Button>
@@ -235,7 +267,7 @@ export default function Activity() {
               />
             </div>
             <div className={styles.commentsContainer}>
-              {currentActivity &&
+            {currentActivity &&
                 currentActivity.map((comment, index) => (
                   <div className={styles.comment} key={index}>
                     <div className={styles.commentHeader}>
@@ -248,10 +280,23 @@ export default function Activity() {
                     <div className={styles.commentText} dangerouslySetInnerHTML={{ __html: comment.comment }} />
                   </div>
                 ))}
+              {showDetails && currentDetails && (
+              <div>
+              <h4 className={styles.h3}>Other Details</h4>
+              {currentDetails.map((detail, index) => (
+                <p className={styles.p1} key={index}>
+                  <TrendingFlatIcon className={styles.icon} />
+                  <strong>{TaskName}</strong> task moved from <strong>{detail}</strong> to <strong>{ListName}</strong>
+                </p>
+              ))}
+            </div>
+              )}
             </div>
           </>
         )}
+      
       </div>
     </>
   );
+  
 }

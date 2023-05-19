@@ -50,8 +50,9 @@ const List = ({ list, listIndex }) => {
         const newTask = {
           id: editingTaskId || uuid(),
           name: newTaskName,
-          description: "", // Add description field
-          activity: [], // Add activity field
+          description: "", 
+          activity: [], 
+          details:[]
         };
         if (editingTaskId) {
           const existingTaskIndex = updatedLists[addingTaskIndex].tasks.findIndex(

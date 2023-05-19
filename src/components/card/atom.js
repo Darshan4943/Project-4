@@ -4,6 +4,18 @@ export const listId = atom({
   key: 'listId',
   default: null,
 });
+export const sourceState = atom({
+  key: 'sourceState',
+  default: null,
+});
+export const destinationState = atom({
+  key: 'destinationState',
+  default: null,
+});
+export const draggableState = atom({
+  key: 'dragableState',
+  default: null,
+});
 export const tasksIndex = atom({
   key: 'tasksIndex',
   default: null,
