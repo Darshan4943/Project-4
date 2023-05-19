@@ -75,4 +75,6 @@ const boardData = {
 
 ## Deployment Link
 
-https://project4-s3ve.onrender.com
+<a href="https://project4-s3ve.onrender.com" target="_blank" rel="noopener noreferrer">
+  https://project4-s3ve.onrender.com
+</a>
