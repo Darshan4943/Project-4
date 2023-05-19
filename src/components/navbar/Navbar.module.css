@@ -1,0 +1,97 @@
+.icon {
+  font-size: 20px;
+  color: #faf5f5;
+  opacity: 0.7;
+  transition: opacity 0.3s;
+  margin-left: 20px;
+}
+ .menuContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 9 rem;
+}
+ .menuButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  margin-right: 10px;
+}
+ .arrowIcon {
+  font-size: 12px;
+  margin-left: 5px;
+}
+ .dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdownContent a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown:hover .dropdownContent {
+  display: block;
+  border-radius: 23px;
+  font-size:medium;
+}
+ .logo {
+  font-size: 24px;
+   margin-right: 10px; 
+  /* padding: 10px; */
+}
+.logoText {
+  font-size: 20px;
+  font-weight: bold;
+}
+ .userImage {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+ #whiteBtn{
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+  }
+#whiteBtn:hover{
+  border-radius: 23px;
+   background-color: rgb(215, 9, 252);
+   color: white;
+}
+ 
+ 
+ .titleInput {
+  color: rgb(249, 245, 245) !important;
+
+  .MuiInputBase-root {
+    width: 200px;
+  }
+
+  .MuiInputBase-input {
+    font-weight: bold;
+  }
+  .editing {
+    color: white;
+  }
+  
+
+  .MuiInput-underline:before {
+    border-bottom: 1px solid white;
+  }
+
+  .MuiInput-underline:hover:not(.Mui-disabled):before {
+    border-bottom: 1px solid white;
+  }
+}
+
+.text{
+  color: rgb(246, 242, 242);
+}

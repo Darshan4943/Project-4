@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 16px;
+  background-color: rgb(246, 244, 242);
+  margin: 2rem;
+  flex-wrap: wrap; /* Added flex-wrap property */
+
+}
+
+.columnHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.popover {
+  display: flex;
+  align-items: center;
+}
+.listName{
+  margin-bottom: 1rem !important;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: antiquewhite ;
+  margin-bottom: 8px;
+ margin-top: 1rem;
+}
+
+.taskButtons {
+  display: flex;
+  margin-left: 5rem;
+}
+
+.newTask {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+  width: 50%;
+}
+.newTasks {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  width: 80%;
+}
+.btn{
+  margin-left: 1rem !important;
+}
+
+.addTaskButton {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+/* Add more custom styles as needed */
