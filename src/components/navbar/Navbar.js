@@ -28,6 +28,7 @@ const StyledToolbar = styled(Toolbar)`
 `;
 
 const TitleInput = styled(TextField)`
+
   ${styles.titleInput}
   
 `;
@@ -107,20 +108,24 @@ const Navbar = () => {
           <AiOutlineStar />
        </div>      
         
-        {editTitle ? (
-          <TitleInput
-            inputRef={inputRef}
-            value={title}
-            onChange={handleTitleChange}
-            onBlur={handleTitleBlur}
-            onKeyPress={handleTitleKeyPress}
-            autoFocus
-          />
-        ) : (
-          <Typography variant="h6" onClick={handleTitleClick}>
-            {title}
-          </Typography>
-        )}
+       {editTitle ? (
+  <TitleInput
+    className={`${styles.text} ${styles.editing}`}
+    inputRef={inputRef}
+    value={title}
+    onChange={handleTitleChange}
+    onBlur={handleTitleBlur}
+    onKeyPress={handleTitleKeyPress}
+    autoFocus
+    style={{ color: 'white' }} 
+  />
+) : (
+  <Typography variant="h6" className={styles.text} onClick={handleTitleClick}>
+    {title}
+  </Typography>
+)}
+
+
         <StyledIconButton>
         <div className={styles.menuContainer}>
          <div className={styles.dropdown}>

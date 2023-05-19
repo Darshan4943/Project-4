@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import List from './List';
 import { addingTaskIndexState, listsState, newTaskNameState } from './atom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { StyledBoard, StyledContainer } from './StyledComponents';
+
 import styles from "./listContainer.module.css"
 const ListContainer = () => {
   const [lists, setLists] = useRecoilState(listsState);
-
+  const [num, setNum] = useState(0);
+  useEffect(()=>{setNum(Math.floor(Math.random() * 100).toString())},[lists])
  
   const handleDragEnd = (result) => {
     const { destination, source, draggableId, type } = result;
@@ -59,7 +60,7 @@ const ListContainer = () => {
 const destinationList = lists[storeDestinationIndex];
 
 if (!sourceList || !destinationList) {
-  // Handle the error condition when the source or destination list is not found
+  
   return;
 }
 
@@ -89,12 +90,12 @@ const newDestinationItems =
   return (
     <div className={styles.main}>
     <DragDropContext onDragEnd={handleDragEnd}>
-      <Droppable droppableId="listContainer" direction="horizontal" type="list">
+      <Droppable droppableId={num} direction="horizontal" type="list">
         {(provided) => (
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            style={{ display: 'flex' }} // Added style to make it horizontal
+            style={{ display: 'flex' }} 
           >
             {lists.map((list, index) => (
               <List key={list.id} list={list} listIndex={index} />

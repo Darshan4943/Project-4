@@ -69,7 +69,7 @@
  
  
  .titleInput {
-  color: white;
+  color: rgb(249, 245, 245) !important;
 
   .MuiInputBase-root {
     width: 200px;
@@ -78,6 +78,10 @@
   .MuiInputBase-input {
     font-weight: bold;
   }
+  .editing {
+    color: white;
+  }
+  
 
   .MuiInput-underline:before {
     border-bottom: 1px solid white;
@@ -88,4 +92,6 @@
   }
 }
 
-
+.text{
+  color: rgb(246, 242, 242);
+}

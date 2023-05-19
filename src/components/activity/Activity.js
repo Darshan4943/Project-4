@@ -12,6 +12,9 @@ import styles from "./Activity.module.css";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { listId, listName, listsState, newIndex, taskName, tasksIndex } from "../card/atom";
+import Avatar from "@mui/material/Avatar";
+import { formatDistanceToNow } from "date-fns";
+
 
 export default function Activity() {
   const [showDetails, setShowDetails] = useState(false);
@@ -28,6 +31,7 @@ export default function Activity() {
   const [List, setList] = useRecoilState(listsState);
   const [TaskName, setTaskName] = useRecoilState(taskName);
   const [ListName, setListName] = useRecoilState(listName);
+  const commentTime = new Date(comments.time);
   const handleCloseDialog = () => {
     console.log("Dialog closed");
   };
@@ -50,17 +54,6 @@ export default function Activity() {
 
   const handleShowDescription = () => {
     setShowDescription(true);
-  };
-  const handleAddComment = () => {
-    if (activity.trim() !== "") {
-      const newComment = {
-        id: Date.now(),
-        comment: activity.trim(),
-      };
-
-      setComments((prevComments) => [...prevComments, newComment]);
-      setActivity("");
-    }
   };
 
 
@@ -87,12 +80,12 @@ export default function Activity() {
   };
 
   const addActivity = () => {
-    const newActivity = { comment: activity };
+    const newActivity = { comment: activity, user: "Darshan", time: new Date() };
     const newList = List.map((item) => {
       if (item.id === listid) {
         const newTaskList = item.tasks.map((obj, index) => {
           if (index === newindex) {
-            const updatedActivity = obj.activity ? [ newActivity,...obj.activity] : [newActivity];
+            const updatedActivity = obj.activity ? [newActivity, ...obj.activity] : [newActivity];
             return { ...obj, activity: updatedActivity };
           } else {
             return obj;
@@ -125,7 +118,7 @@ export default function Activity() {
     setShowActivity(true);
   };
 
-  // Get the description and activity for the current task
+
   const currentTask = List.find((item) => item.id === listid)?.tasks?.[newindex];
   const currentDescription = currentTask?.description;
   const currentActivity = currentTask?.activity;
@@ -135,9 +128,10 @@ export default function Activity() {
       <div className={styles.mainDiv}>
         <div className={styles.title}>
           <h2 className={styles.head}>
-            <span ></span>💻 {TaskName} 
+            <span></span>💻 {TaskName}
+           
           </h2>
-          <p>from {ListName} list</p>
+          
           <div className={styles.closeButton}>
             <IconButton
               aria-label="close dialog"
@@ -150,6 +144,7 @@ export default function Activity() {
             </IconButton>
           </div>
         </div>
+        <p className={styles.p}>from {ListName} list</p>
         <div className={styles.notificationWatchContainer}>
           <div className={styles.notification}>
             <span className={styles.notificationText}>Notifications</span>
@@ -194,7 +189,7 @@ export default function Activity() {
               <div className={styles.currentDescription} dangerouslySetInnerHTML={{ __html: currentDescription }} />
             ) : (
               <input
-                className={styles.secondInputBox}
+                className={styles.InputBox}
                 placeholder="Write a Description..."
                 onClick={handleShowDescription}
               />
@@ -231,22 +226,30 @@ export default function Activity() {
           </div>
         ) : (
           <>
-          <input
-            className={styles.secondInputBox}
-            placeholder="Write a Comment..."
-            onClick={handleShowActive}
-          />
-          <div className={styles.commentsContainer}>
-            {currentActivity &&
-              currentActivity.map((comment) => (
-               
-                <div className={styles.comment} key={comment.id} dangerouslySetInnerHTML={{ __html: comment.comment }}>
-                  {/* {comment.comment} */}
-                </div>
-              ))}
-          </div>
-        </>
-        
+            <div className={styles.commentInputContainer}>
+              <Avatar className={styles.avatar} />
+              <input
+                className={styles.secondInputBox}
+                placeholder="Write a Comment..."
+                onClick={handleShowActive}
+              />
+            </div>
+            <div className={styles.commentsContainer}>
+              {currentActivity &&
+                currentActivity.map((comment, index) => (
+                  <div className={styles.comment} key={index}>
+                    <div className={styles.commentHeader}>
+                      <Avatar className={styles.avatar} />
+                      <span className={styles.userName}>{comment.user}</span>
+                      <span className={styles.time}>
+                        {formatDistanceToNow(new Date(comment.time), { addSuffix: true })}
+                      </span>
+                    </div>
+                    <div className={styles.commentText} dangerouslySetInnerHTML={{ __html: comment.comment }} />
+                  </div>
+                ))}
+            </div>
+          </>
         )}
       </div>
     </>

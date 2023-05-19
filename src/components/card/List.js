@@ -161,7 +161,7 @@ const List = ({ list, listIndex }) => {
                   <Popover
                     {...bindPopover(popupState)}
                     anchorOrigin={{
-                      vertical: "bottom",
+                      vertical: "top",
                       horizontal: "left",
                     }}
                     transformOrigin={{

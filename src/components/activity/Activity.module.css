@@ -1,17 +1,22 @@
 .mainDiv {
-    background-color: #cecbcb;
+    background-color: #ece9e9;
     padding: 1rem;
     border-radius: 5px;
-    width: 40%;
+    width: 45%;
     height: 100vh;
-    margin: 0 30%;
+    margin: 0 27%;
+  }
+  .p{
+    font-size: 1rem;
+    margin-left: 3rem;
+    margin-bottom: 2rem;
   }
   
   .title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    
   }
   
   .head {
@@ -67,7 +72,7 @@
     background-color: #fff;
     padding: 1rem;
     border-radius: 5px;
-    margin-bottom: 1rem;
+    margin: 3rem !important;
   }
   
   .buttonContainer {
@@ -76,12 +81,18 @@
   .btn{
     margin-bottom: 10rem;
   }
-  
-  .activity {
-    background-color: #fff;
+  .InputBox{
     padding: 0.5rem;
     border-radius: 5px;
-    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+    margin: 2rem;
+  }
+  .activity {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: 3rem !important;
   }
   
   .savedActivity {
@@ -93,7 +104,9 @@
     border-radius: 5px;
     border: 1px solid #ccc;
     margin-bottom: 0.5rem;
-    margin-left: 2rem;
+    width: 80%;
+    overflow-wrap: anywhere;
+    padding-left: 1rem;
   }
   
   .savedText {
@@ -103,26 +116,72 @@
     margin-bottom: 0.5rem;
   }
   .currentDescription{
-    padding: 0.2rem;
+    padding: 1rem;
     border-radius: 5px;
     border: 1px solid #ccc;
     margin-bottom: 0.5rem;
     background-color: #f9f9f9;
-    width: 80%;
-    margin-left: 2rem;
+    width: 70%;
+    margin: 2rem;
     overflow-wrap: anywhere;
   }
  
-  .comment{
+ 
+  .h4{
+    margin-left: 3rem;
+    margin-top: 1rem;
+  }
+  .commentsContainer {
+    margin-top: 1rem;
+  }
+  
+  .comment {
     
-      padding-left:  1rem;
-      border-radius: 20px;
-      border: 1px solid #f9f8f8;
-      margin: 0.5rem;
-      margin-left: 3rem;
-      background-color: #ffffff;
-      width: 50%;
-      overflow-wrap: anywhere;
-      align-items: center;
+   margin-top: 1rem;
+    
+  }
+  
+  .commentHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+  }
+  
+  .userName {
+    font-weight: bold;
+    margin-right: 0.5rem;
+  }
+  
+  .time {
+    color: #666;
+  }
+  
+  .commentText {
+   
+    border: 1px solid #fffcfc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 0.5rem;
+   padding-left: 1rem;
+    margin-left: 3rem;
+    width: 80%;
+    overflow-wrap: anywhere;
+  }
+  
+  
+  .commentInputContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
    
   }
+  
+ 
+  
