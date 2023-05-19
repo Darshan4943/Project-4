@@ -7,7 +7,7 @@
   margin-bottom: 16px;
   background-color: rgb(246, 244, 242);
   margin: 2rem;
-  flex-wrap: wrap; /* Added flex-wrap property */
+  flex-wrap: wrap; 
 
 }
 
@@ -65,4 +65,4 @@
   margin-top: 2rem;
 }
 
-/* Add more custom styles as needed */
+

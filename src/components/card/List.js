@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuid } from "uuid";
-import { StyledColumn } from "./StyledComponents";
+
 import { useRecoilState, useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import {
@@ -74,7 +74,7 @@ const List = ({ list, listIndex }) => {
             tasks: [...updatedLists[addingTaskIndex].tasks, newTask],
           };
         }
-        localStorage.setItem("Lists", JSON.stringify(updatedLists)); // Update local storage
+        localStorage.setItem("Lists", JSON.stringify(updatedLists)); 
         return updatedLists;
       });
       setNewTaskName("");
@@ -86,7 +86,7 @@ const List = ({ list, listIndex }) => {
   const handleListDelete = (id) => {
     const filteredList = lists.filter((list) => list.id !== id);
     setLists(filteredList);
-    localStorage.setItem("Lists", JSON.stringify(filteredList)); // Update local storage
+    localStorage.setItem("Lists", JSON.stringify(filteredList)); 
   };
 
   const handleCardDelete = (cardId) => {
@@ -94,7 +94,7 @@ const List = ({ list, listIndex }) => {
       const updatedLists = [...prevLists];
       const updatedTasks = updatedLists[listIndex].tasks.filter((task) => task.id !== cardId);
       updatedLists[listIndex] = { ...updatedLists[listIndex], tasks: updatedTasks };
-      localStorage.setItem("Lists", JSON.stringify(updatedLists)); // Update local storage
+      localStorage.setItem("Lists", JSON.stringify(updatedLists)); 
       return updatedLists;
     });
   };

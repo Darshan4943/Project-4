@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Button from "@mui/joy/Button";
-import { StyledColumn } from "../card/StyledComponents";
+
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
