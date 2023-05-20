@@ -108,25 +108,11 @@ const Navbar = () => {
           <AiOutlineStar />
        </div>      
         
-       {editTitle ? (
-  <TitleInput
-    className={`${styles.text} ${styles.editing}`}
-    inputRef={inputRef}
-    value={title}
-    onChange={handleTitleChange}
-    onBlur={handleTitleBlur}
-    onKeyPress={handleTitleKeyPress}
-    autoFocus
-    style={{ color: 'white' }} 
-  />
-) : (
+       
   <Typography variant="h6" className={styles.text} onClick={handleTitleClick}>
     {title}
   </Typography>
-)}
 
-
-     
         <Menu
           id="menu-appbar"
           anchorEl={anchorEl}
